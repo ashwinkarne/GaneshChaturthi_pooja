@@ -1,10 +1,12 @@
 
 import './App.css'
+import Userinput from './User_input'
 
 function App() {
   return (
      <>
-     <div>Hii</div>
+      <Userinput />
+
      </>
   )
 }
