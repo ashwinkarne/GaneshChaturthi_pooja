@@ -13,7 +13,11 @@ function Userinput() {
             return;
         }
 
-        navigate("/welcome");
+        navigate("/welcome",{
+            state: {
+                name: name
+            }
+        });
     };
 
     return (
