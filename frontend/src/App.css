@@ -1,7 +1,465 @@
-.user-input-container{
-  background-color: #ff0000;
-  width: 500px;
-  height :650px;
-  margin: 0 auto;
-  padding: 30px;
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    font-family: "DM Sans", sans-serif;
+
+    color: #fff8e7;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 190, 80, 0.18),
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #2b0803 0%,
+            #5c1508 50%,
+            #250603 100%
+        );
+
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 208, 104, 0.22) 1px,
+            transparent 1px
+        );
+
+    background-size: 32px 32px;
+
+    opacity: 0.3;
+
+    animation: backgroundMove 25s linear infinite;
+}
+
+@keyframes backgroundMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 320px 320px;
+    }
+}
+
+
+
+.user-input-container {
+    position: relative;
+    top: 21vh;
+
+    width: min(90%, 520px);
+
+    min-height: 420px;
+
+    margin: 0 auto;
+
+    padding: 50px 45px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 245, 218, 0.10),
+            rgba(255, 176, 70, 0.04)
+        );
+
+    border: 1px solid rgba(255, 204, 112, 0.45);
+
+    border-radius: 28px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.45),
+        inset 0 0 35px rgba(255, 185, 70, 0.05),
+        0 0 45px rgba(255, 146, 35, 0.08);
+
+    animation: cardAppear 0.9s ease forwards;
+}
+
+.user-input-container::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 199, 89, 0.5),
+            transparent
+        );
+
+    z-index: -1;
+
+    filter: blur(10px);
+
+    animation: goldenGlow 4s ease-in-out infinite;
+}
+
+@keyframes goldenGlow {
+
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.75;
+    }
+}
+
+
+
+.user-input-container h1 {
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+
+    line-height: 1.3;
+
+    margin-bottom: 32px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffe7a3,
+            #ffffff,
+            #ffd16b,
+            #fff1bd
+        );
+
+    background-size: 250% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    animation: goldText 5s linear infinite;
+}
+
+@keyframes goldText {
+    to {
+        background-position: 250% center;
+    }
+}
+
+
+.user-input-container label {
+    align-self: flex-start;
+
+    margin-bottom: 9px;
+
+    color: #ffd98a;
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+}
+
+
+
+
+.user-input-container input {
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 14px 17px;
+
+    border: 1px solid rgba(255, 211, 127, 0.4);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: rgba(30, 5, 2, 0.65);
+
+    color: #fff4d6;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.user-input-container input::placeholder {
+    color: rgba(255, 229, 177, 0.45);
+}
+
+
+
+
+.user-input-container input:focus {
+    border-color: #ffc85b;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 185, 64, 0.12),
+        0 0 25px rgba(255, 176, 55, 0.18);
+}
+
+
+
+.user-input-container p {
+    width: 100%;
+
+    margin-top: 13px;
+
+    text-align: left;
+
+    color: rgba(255, 233, 190, 0.65);
+
+    font-size: 0.78rem;
+
+    line-height: 1.5;
+}
+
+.user-input-container p strong {
+    color: #ffc85b;
+}
+
+
+
+
+.user-input-container button {
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-top: 28px;
+
+    padding: 14px 30px;
+
+    border: 1px solid rgba(255, 225, 150, 0.6);
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 0.95rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    color: #4b1005;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe39a,
+            #ffc34d,
+            #ffdc7c
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255, 174, 43, 0.22),
+        inset 0 1px 2px rgba(255, 255, 255, 0.7);
+
+  
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+
+
+.user-input-container button:active {
+    transform: scale(0.96);
+
+    box-shadow:
+        0 4px 12px rgba(255, 174, 43, 0.2),
+        inset 0 2px 5px rgba(120, 60, 0, 0.15);
+}
+
+
+
+
+@media (hover: hover) and (pointer: fine) {
+
+    .user-input-container button:hover {
+        filter: brightness(1.06);
+    }
+}
+
+
+
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+
+
+@media (min-width: 601px) and (max-width: 900px) {
+
+    .user-input-container {
+        width: min(75%, 560px);
+
+        padding: 55px 50px;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding:
+            max(20px, env(safe-area-inset-top))
+            0
+            max(20px, env(safe-area-inset-bottom))
+            0;
+    }
+
+    .user-input-container {
+        width: calc(100% - 32px);
+
+        min-height: auto;
+
+        margin: 16px auto;
+
+        padding: 38px 24px;
+
+        border-radius: 24px;
+    }
+
+    .user-input-container h1 {
+        font-size: clamp(1.45rem, 7vw, 1.9rem);
+
+        margin-bottom: 28px;
+    }
+
+    .user-input-container input {
+        min-height: 52px;
+
+        font-size: 16px;
+    }
+
+    .user-input-container button {
+        min-height: 56px;
+
+        margin-top: 26px;
+
+        font-size: 0.9rem;
+
+        border-radius: 15px;
+    }
+}
+
+
+
+@media (max-width: 380px) {
+
+    .user-input-container {
+        width: calc(100% - 24px);
+
+        padding: 32px 20px;
+
+        border-radius: 21px;
+    }
+
+    .user-input-container h1 {
+        font-size: 1.4rem;
+    }
+
+    .user-input-container p {
+        font-size: 0.73rem;
+    }
+
+    .user-input-container button {
+        min-height: 52px;
+    }
+}
+
+
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .user-input-container {
+        margin: 20px auto;
+
+        padding: 30px;
+
+        min-height: auto;
+    }
+
+    .user-input-container h1 {
+        margin-bottom: 20px;
+    }
+
+    .user-input-container button {
+        margin-top: 20px;
+    }
+}
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
 }
