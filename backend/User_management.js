@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const Database = require("better-sqlite3");
 const db = new Database("employee_list");
+
+app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 
 app.use(express.json())
 /*Creating Database */
