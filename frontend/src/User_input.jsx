@@ -5,20 +5,35 @@ function Userinput() {
     const { name, setName } = useUser();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (!name.trim()) {
-            alert("Please enter your name");
-            return;
-        }
+    if (!name.trim()) {
+        alert("Please enter your name");
+        return;
+    }
 
-        navigate("/welcome",{
+    try {
+        await fetch("http://localhost:5050/api/devotees", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        });
+
+        navigate("/welcome", {
             state: {
                 name: name
             }
         });
-    };
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
 
     return (
         <div className="user-input-container">
