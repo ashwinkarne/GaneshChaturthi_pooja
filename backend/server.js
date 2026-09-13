@@ -15,6 +15,7 @@ db.prepare(`
     )
 `).run();
 
+
 // POST API
 app.post("/api/devotees", (req, res) => {
     const { name } = req.body;
@@ -58,6 +59,42 @@ app.get("/api/devotees/count", (req, res) => {
     });
 });
 
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS Feedbacks(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        feedback TEXT NOT NULL
+    )
+`).run();
+
+
+app.post("/api/feedback", (req, res) => {
+    const { name, feedback } = req.body;
+
+    if (!name || !feedback) {
+        return res.status(400).json({
+            error: "Name and feedback are required"
+        });
+    }
+
+    db.prepare(`
+        INSERT INTO Feedbacks (name, feedback)
+        VALUES (?, ?)
+    `).run(name, feedback);
+
+    res.status(201).json({
+        message: "Feedback submitted successfully"
+    });
+});
+
+app.get("/api/feedback", (req, res) => {
+    const feedbacks = db.prepare(`
+        SELECT * FROM Feedbacks
+        ORDER BY id DESC
+    `).all();
+
+    res.json(feedbacks);
+});
 
 app.listen(5050, () => {
     console.log("Server running on http://localhost:5050");

@@ -39,7 +39,6 @@ function Visitors() {
     return (
         <div className="visitors-page">
 
-            {/* Back Button */}
             <button
                 className="visitors-back-button"
                 onClick={() => navigate(-1)}
