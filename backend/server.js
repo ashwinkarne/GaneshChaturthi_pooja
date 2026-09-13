@@ -35,9 +35,29 @@ app.post("/api/devotees", (req, res) => {
 
 // GET API
 app.get("/api/devotees", (req, res) => {
-    const devotees = db.prepare("SELECT * FROM devotees").all();
+    const devotees = db
+        .prepare(`
+            SELECT * FROM devotees
+            ORDER BY id DESC
+        `)
+        .all();
+
     res.json(devotees);
 });
+
+app.get("/api/devotees/count", (req, res) => {
+    const result = db
+        .prepare(`
+            SELECT COUNT(*) AS count
+            FROM devotees
+        `)
+        .get();
+
+    res.json({
+        count: result.count
+    });
+});
+
 
 app.listen(5050, () => {
     console.log("Server running on http://localhost:5050");
