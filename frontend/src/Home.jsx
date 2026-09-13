@@ -144,15 +144,15 @@ function Home() {
     return (
         <div className="home-page">
 
-            {/* Dark overlay */}
+            
             <div className="home-overlay"></div>
 
-            {/* Top decoration */}
+            
             <div className="top-decoration">
                 🪔 ✨ 🌺 ✨ 🪔
             </div>
 
-            {/* Heading */}
+         
             <div className="darshan-heading">
                 <p>Darshan of</p>
 
@@ -168,7 +168,6 @@ function Home() {
                 </span>
             </div>
 
-            {/* Flowers */}
             <div className="flower-container">
                 {flowers.map((flower) => (
                     <img
@@ -189,16 +188,16 @@ function Home() {
                 ))}
             </div>
 
-            {/* Mangal Harathi */}
+            
             {showHarathi && (
                 <div className="harathi-overlay">
 
                     <div className="harathi-glow"></div>
 
-                    {/* Circular revolving area */}
+                    
                     <div className="harathi-orbit">
 
-                        {/* Deepa stays upright while orbiting */}
+                        
                         <img
                             src={mangalDeepa}
                             className="mangal-deepa"
@@ -214,7 +213,7 @@ function Home() {
                 </div>
             )}
 
-            {/* Bottom buttons */}
+           
             <div className="home-buttons">
 
                 <button
@@ -239,7 +238,7 @@ function Home() {
                     </span>
                 </button>
 
-                {/* All Visitors */}
+               
                 <button
                     className="pooja-button"
                     onClick={() => navigate("/visitors")}
@@ -251,7 +250,7 @@ function Home() {
                     </span>
                 </button>
 
-                {/* Feedback */}
+                
                 <button
                     className="pooja-button"
                     onClick={() => navigate("/feedback")}

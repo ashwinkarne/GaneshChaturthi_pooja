@@ -36,50 +36,35 @@ function Visitors() {
     return (
         <div className="visitors-page">
 
-            {/* Decorative background elements */}
+        
             <div className="visitor-decoration decoration-one">✦</div>
             <div className="visitor-decoration decoration-two">✦</div>
 
-            {/* ================= COUNT SECTION ================= */}
+            
             <section className="visitor-count-section">
 
                 <div className="visitor-top-symbol">
                     ॐ
                 </div>
 
-                <p className="visitor-small-heading">
-                    श्री गणेशाय नमः
-                </p>
-
                 <h1>
-                    Our Devotees
+                    Number of Visitors
                 </h1>
-
-                <div className="count-divider">
-                    <span></span>
-                    <div>🙏</div>
-                    <span></span>
-                </div>
 
                 <div className="devotee-count-circle">
                     <span>{count}</span>
                 </div>
 
-                <p className="count-label">
-                    Devotees have offered their names
-                </p>
-
             </section>
 
 
-            {/* ================= NAMES SECTION ================= */}
+            
             <section className="visitor-names-section">
 
                 <div className="names-heading">
                     <span className="heading-line"></span>
 
                     <div>
-                        <p>With Divine Blessings</p>
                         <h2>Devotee Names</h2>
                     </div>
 
