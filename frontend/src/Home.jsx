@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
-// Background music
 import backgroundMusic from "./assets/sounds/background-melody.mp3";
 import harathiMusic from "./assets/sounds/mangal-harathi.mp3";
 
-// Mangal deepa
 import mangalDeepa from "./assets/mangal-deepa.png";
 
-// Flowers
 import flower1 from "./assets/flowers/flower1.png";
 import flower2 from "./assets/flowers/flower2.png";
 import flower3 from "./assets/flowers/flower3.png";
@@ -19,9 +17,11 @@ import flower6 from "./assets/flowers/flower6.png";
 
 function Home() {
     const { name } = useUser();
+    const navigate = useNavigate();
 
     const backgroundAudioRef = useRef(null);
     const harathiAudioRef = useRef(null);
+    const harathiTimerRef = useRef(null);
 
     const [showHarathi, setShowHarathi] = useState(false);
     const [flowers, setFlowers] = useState([]);
@@ -35,7 +35,6 @@ function Home() {
         flower6,
     ];
 
-    // Background music
     useEffect(() => {
         const audio = new Audio(backgroundMusic);
 
@@ -44,7 +43,6 @@ function Home() {
 
         backgroundAudioRef.current = audio;
 
-        // Browser may block autoplay.
         audio.play().catch(() => {
             console.log("Autoplay blocked by browser.");
         });
@@ -52,44 +50,67 @@ function Home() {
         return () => {
             audio.pause();
             audio.currentTime = 0;
+
+            if (harathiTimerRef.current) {
+                clearTimeout(harathiTimerRef.current);
+            }
+
+            if (harathiAudioRef.current) {
+                harathiAudioRef.current.pause();
+                harathiAudioRef.current.currentTime = 0;
+            }
         };
     }, []);
 
-    // Mangal Harathi
     const handleHarathi = () => {
-        // Stop background music
+        if (harathiTimerRef.current) {
+            clearTimeout(harathiTimerRef.current);
+        }
+
         if (backgroundAudioRef.current) {
             backgroundAudioRef.current.pause();
         }
 
-        // Play harathi song
+        if (harathiAudioRef.current) {
+            harathiAudioRef.current.pause();
+            harathiAudioRef.current.currentTime = 0;
+        }
+
         const harathi = new Audio(harathiMusic);
+
         harathi.volume = 0.8;
-        harathi.play();
+
+        harathi.play().catch(() => {
+            console.log("Harathi audio could not be played.");
+        });
 
         harathiAudioRef.current = harathi;
 
-        // Show deepa
         setShowHarathi(true);
 
-        // Deepa animation for 7 seconds
-        setTimeout(() => {
+        harathiTimerRef.current = setTimeout(() => {
             setShowHarathi(false);
 
-            // Start background music again
+            if (harathiAudioRef.current) {
+                harathiAudioRef.current.pause();
+                harathiAudioRef.current.currentTime = 0;
+            }
+
             if (backgroundAudioRef.current) {
                 backgroundAudioRef.current.currentTime = 0;
-                backgroundAudioRef.current.play().catch(() => {});
+
+                backgroundAudioRef.current
+                    .play()
+                    .catch(() => {});
             }
         }, 7000);
     };
 
-    // Blow flowers
     const handleFlowers = () => {
         const newFlowers = [];
 
         const numberOfFlowers =
-            Math.floor(Math.random() * 6) + 20; // 20-25
+            Math.floor(Math.random() * 6) + 20;
 
         for (let i = 0; i < numberOfFlowers; i++) {
             const randomFlower =
@@ -98,17 +119,14 @@ function Home() {
                 ];
 
             newFlowers.push({
-                id: Date.now() + i,
+                id: `${Date.now()}-${i}`,
                 image: randomFlower,
 
-                // Starting position
                 startX: Math.random() * 100,
 
-                // Final position
                 endX: 35 + Math.random() * 30,
                 endY: 30 + Math.random() * 35,
 
-                // Random animation values
                 size: 25 + Math.random() * 35,
                 duration: 2.5 + Math.random() * 2,
                 delay: Math.random() * 0.8,
@@ -118,7 +136,6 @@ function Home() {
 
         setFlowers(newFlowers);
 
-        // Remove flowers after animation
         setTimeout(() => {
             setFlowers([]);
         }, 5500);
@@ -158,6 +175,7 @@ function Home() {
                         key={flower.id}
                         src={flower.image}
                         className="flying-flower"
+                        alt=""
                         style={{
                             "--startX": `${flower.startX}vw`,
                             "--endX": `${flower.endX}vw`,
@@ -171,17 +189,23 @@ function Home() {
                 ))}
             </div>
 
-            {/* Mangal Deepa */}
+            {/* Mangal Harathi */}
             {showHarathi && (
                 <div className="harathi-overlay">
 
                     <div className="harathi-glow"></div>
 
-                    <img
-                        src={mangalDeepa}
-                        className="mangal-deepa"
-                        alt="Mangal Deepa"
-                    />
+                    {/* Circular revolving area */}
+                    <div className="harathi-orbit">
+
+                        {/* Deepa stays upright while orbiting */}
+                        <img
+                            src={mangalDeepa}
+                            className="mangal-deepa"
+                            alt="Mangal Deepa"
+                        />
+
+                    </div>
 
                     <p className="harathi-text">
                         🪔 Mangal Harathi 🪔
@@ -215,9 +239,10 @@ function Home() {
                     </span>
                 </button>
 
+                {/* All Visitors */}
                 <button
                     className="pooja-button"
-                    onClick={() => console.log("Visitors")}
+                    onClick={() => navigate("/visitors")}
                 >
                     <span className="button-icon">👥</span>
 
@@ -226,9 +251,10 @@ function Home() {
                     </span>
                 </button>
 
+                {/* Feedback */}
                 <button
                     className="pooja-button"
-                    onClick={() => console.log("Feedback")}
+                    onClick={() => navigate("/feedback")}
                 >
                     <span className="button-icon">💬</span>
 
