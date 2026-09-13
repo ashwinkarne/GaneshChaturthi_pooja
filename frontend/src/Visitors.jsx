@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Visitors.css";
 
 function Visitors() {
+    const navigate = useNavigate();
+
     const [count, setCount] = useState(0);
     const [devotees, setDevotees] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -36,11 +39,17 @@ function Visitors() {
     return (
         <div className="visitors-page">
 
-        
+            {/* Back Button */}
+            <button
+                className="visitors-back-button"
+                onClick={() => navigate(-1)}
+            >
+                ← Back
+            </button>
+
             <div className="visitor-decoration decoration-one">✦</div>
             <div className="visitor-decoration decoration-two">✦</div>
 
-            
             <section className="visitor-count-section">
 
                 <div className="visitor-top-symbol">
@@ -57,8 +66,6 @@ function Visitors() {
 
             </section>
 
-
-            
             <section className="visitor-names-section">
 
                 <div className="names-heading">
@@ -70,7 +77,6 @@ function Visitors() {
 
                     <span className="heading-line"></span>
                 </div>
-
 
                 {loading ? (
                     <div className="visitors-loading">
