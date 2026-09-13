@@ -96,6 +96,23 @@ app.get("/api/feedback", (req, res) => {
     res.json(feedbacks);
 });
 
+app.delete("/api/delete-all-data", (req, res) => {
+    try {
+        db.prepare("DELETE FROM devotees").run();
+        db.prepare("DELETE FROM Feedbacks").run();
+
+        res.json({
+            message: "All devotee and feedback data deleted successfully"
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to delete data"
+        });
+    }
+});
+
 app.listen(5050, () => {
     console.log("Server running on http://localhost:5050");
 });
