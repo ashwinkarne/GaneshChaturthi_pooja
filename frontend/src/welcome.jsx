@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./welcome.css";
 
@@ -7,13 +7,44 @@ function Welcome() {
     const navigate = useNavigate();
 
     const [videoFinished, setVideoFinished] = useState(false);
+    const audioRef = useRef(null);
+
     const name = location.state.name;
+
+    useEffect(() => {
+        const audio = audioRef.current;
+
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch((error) => {
+                console.log("Audio autoplay was blocked:", error);
+            });
+        }
+
+        return () => {
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        };
+    }, []);
 
     const handleVideoEnd = () => {
         setVideoFinished(true);
+
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+        }
     };
 
     const handleNext = () => {
+       
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+        }
+
         navigate("/home", {
             state: {
                 name: name
@@ -23,6 +54,13 @@ function Welcome() {
 
     return (
         <div className="welcome-page">
+
+            
+            <audio
+                ref={audioRef}
+                src="/audio/welcome-video-main-audio.mp3"
+                loop
+            />
 
             {!videoFinished ? (
                 <div className="welcome-video-container">
@@ -34,7 +72,7 @@ function Welcome() {
                         onEnded={handleVideoEnd}
                     >
                         <source
-                            src="/videos/welcome-video-simple.mp4"
+                            src="/videos/welcome-video-main.mp4"
                             type="video/mp4"
                         />
 
