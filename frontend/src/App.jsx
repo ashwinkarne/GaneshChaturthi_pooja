@@ -4,6 +4,7 @@ import Userinput from './User_input'
 import Welcome from "./welcome";
 import Home from "./Home";  
 import Visitors from "./Visitors";
+import Feedback from "./Feedback";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route path="/welcome" element={<Welcome />} />\
             <Route path="/home" element={<Home />} />
             <Route path="/visitors" element={<Visitors />} />
+            <Route path="/Feedback" element={<Feedback />} />
         </Routes>
     </BrowserRouter>
   )
