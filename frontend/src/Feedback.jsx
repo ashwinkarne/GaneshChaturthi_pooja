@@ -10,7 +10,7 @@ function Feedback() {
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
-    const API_URL = "https://ganeshchaturthi-by-ashwin.onrender.com";
+    const API_URL = "https://ganeshchaturthi-pooja.onrender.com";
 
     
     const fetchFeedbacks = async () => {

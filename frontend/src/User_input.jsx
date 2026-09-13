@@ -14,7 +14,7 @@ function Userinput() {
     }
 
     try {
-        await fetch("https://ganeshchaturthi-by-ashwin.onrender.com/api/devotees", {
+        await fetch("https://ganeshchaturthi-pooja.onrender.com/api/devotees", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

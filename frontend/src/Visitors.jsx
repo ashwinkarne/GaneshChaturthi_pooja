@@ -13,8 +13,8 @@ function Visitors() {
         const fetchVisitors = async () => {
             try {
                 const [countResponse, devoteesResponse] = await Promise.all([
-                    fetch("https://ganeshchaturthi-by-ashwin.onrender.com/api/devotees/count"),
-                    fetch("https://ganeshchaturthi-by-ashwin.onrender.com/api/devotees")
+                    fetch("https://ganeshchaturthi-pooja.onrender.com/api/devotees/count"),
+                    fetch("https://ganeshchaturthi-pooja.onrender.com/api/devotees")
                 ]);
 
                 if (!countResponse.ok || !devoteesResponse.ok) {
